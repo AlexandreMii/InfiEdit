@@ -1,13 +1,13 @@
+<!DOCTYPE html>
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>InfiEdit</title>
+  <!-- Favicon -->
   <link rel="icon" href="images/logo.png" type="image/png">
-  <style><head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>InfiEdit</title>
-  <link rel="icon" href="images/logo.png" type="image/png">
+
+  <!-- Styles -->
   <style>
     body {
       margin: 0;
@@ -129,88 +129,308 @@
   </div>
 
   <div class="toolbar">
-    <button onclick="cutClip()">✂ </button>
-    <button onclick="addText()">📝 </button>
-    <button onclick="addMusic()">🎵 </button>
-    <button onclick="removeLastClip()">🗑 </button>
+    <button onclick="cutClip()">✂</button>
+    <button onclick="addText()">📝</button>
+    <button onclick="addMusic()">🎵</button>
+    <button onclick="removeLastClip()">🗑</button>
   </div>
 
   <div class="timeline" id="timeline"></div>
   <button id="addBtn">+ Ajouter un clip</button>
 
   <script>
-  const timeline = document.getElementById('timeline');
-  const addBtn = document.getElementById('addBtn');
-  let clipCount = 1;
-  let selectedClip = null;
+    const timeline = document.getElementById('timeline');
+    const addBtn = document.getElementById('addBtn');
+    let clipCount = 1;
+    let selectedClip = null;
 
-  addBtn.addEventListener('click', () => {
-    addClip(`Clip ${clipCount}.mp4`);
-    clipCount++;
-  });
-
-  function addClip(name) {
-    const clip = document.createElement('div');
-    clip.className = 'clip';
-    clip.innerText = name;
-    clip.dataset.name = name;
-    clip.addEventListener('click', () => {
-      selectClip(clip);
+    addBtn.addEventListener('click', () => {
+      addClip(`Clip ${clipCount}.mp4`);
+      clipCount++;
     });
-    timeline.appendChild(clip);
-  }
 
-  function selectClip(clip) {
-    const allClips = document.querySelectorAll('.clip');
-    allClips.forEach(c => c.style.border = "none");
-    clip.style.border = "2px solid cyan";
-    selectedClip = clip;
-  }
-
-  function cutClip() {
-    if (!selectedClip) {
-      alert("Sélectionne un clip à découper.");
-      return;
+    function addClip(name) {
+      const clip = document.createElement('div');
+      clip.className = 'clip';
+      clip.innerText = name;
+      clip.dataset.name = name;
+      clip.addEventListener('click', () => {
+        selectClip(clip);
+      });
+      timeline.appendChild(clip);
     }
 
-    const name = selectedClip.dataset.name;
-    const part1 = document.createElement('div');
-    part1.className = 'clip';
-    part1.innerText = name + " (1)";
-    part1.dataset.name = name + " (1)";
-    part1.addEventListener('click', () => selectClip(part1));
-
-    const part2 = document.createElement('div');
-    part2.className = 'clip';
-    part2.innerText = name + " (2)";
-    part2.dataset.name = name + " (2)";
-    part2.addEventListener('click', () => selectClip(part2));
-
-    timeline.insertBefore(part1, selectedClip);
-    timeline.insertBefore(part2, selectedClip.nextSibling);
-    selectedClip.remove();
-    selectedClip = null;
-  }
-
-  function addText() {
-    alert("Fonction 'Ajouter Texte' à venir.");
-  }
-
-  function addMusic() {
-    alert("Fonction 'Ajouter Musique' à venir.");
-  }
-
-  function removeLastClip() {
-    const clips = document.querySelectorAll('.clip');
-    if (clips.length > 0) {
-      clips[clips.length - 1].remove();
-      clipCount--;
+    function selectClip(clip) {
+      const allClips = document.querySelectorAll('.clip');
+      allClips.forEach(c => c.style.border = "none");
+      clip.style.border = "2px solid cyan";
+      selectedClip = clip;
     }
-  }
 
-  function loadVideo(fileName) {
-    const video = document.getElementById('videoPlayer');
-    video.querySelector('source').src = fileName;
-    video.load();
-  }
-</script>
+    function cutClip() {
+      if (!selectedClip) {
+        alert("Sélectionne un clip à découper.");
+        return;
+      }
+
+      const name = selectedClip.dataset.name;
+      const part1 = document.createElement('div');
+      part1.className = 'clip';
+      part1.innerText = name + " (1)";
+      part1.dataset.name = name + " (1)";
+      part1.addEventListener('click', () => selectClip(part1));
+
+      const part2 = document.createElement('div');
+      part2.className = 'clip';
+      part2.innerText = name + " (2)";
+      part2.dataset.name = name + " (2)";
+      part2.addEventListener('click', () => selectClip(part2));
+
+      timeline.insertBefore(part1, selectedClip);
+      timeline.insertBefore(part2, selectedClip.nextSibling);
+      selectedClip.remove();
+      selectedClip = null;
+    }
+
+    function addText() {
+      alert("Fonction 'Ajouter Texte' à venir.");
+    }
+
+    function addMusic() {
+      alert("Fonction 'Ajouter Musique' à venir.");
+    }
+
+    function removeLastClip() {
+      const clips = document.querySelectorAll('.clip');
+      if (clips.length > 0) {
+        clips[clips.length - 1].remove();
+        clipCount--;
+      }
+    }
+
+    function loadVideo(fileName) {
+      const video = document.getElementById('videoPlayer');
+      video.querySelector('source').src = fileName;
+      video.load();
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>InfiEdit</title>
+  <!-- Favicon -->
+  <link rel="icon" href="images/logo.png" type="image/png">
+
+  <!-- Styles -->
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .main {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 200px;
+      background: #222;
+      padding: 10px;
+      overflow-y: auto;
+    }
+
+    .sidebar h2 {
+      font-size: 16px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar li {
+      padding: 8px;
+      background: #333;
+      margin-bottom: 5px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .content {
+      flex: 1;
+      padding: 10px;
+    }
+
+    video {
+      width: 100%;
+      max-height: 300px;
+      border-radius: 10px;
+      background: black;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      background: #181818;
+      border-top: 2px solid #333;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .toolbar button {
+      padding: 8px 16px;
+      background: #444;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .toolbar button:hover {
+      background: #00aaff;
+    }
+
+    .timeline {
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      background: #222;
+      overflow-x: auto;
+      min-height: 60px;
+    }
+
+    .clip {
+      background: #555;
+      padding: 10px 20px;
+      border-radius: 5px;
+      white-space: nowrap;
+    }
+
+    #addBtn {
+      margin: 10px;
+      padding: 10px 20px;
+      background: #00aaff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div class="sidebar">
+      <h2>Fichiers</h2>
+      <ul id="fileList">
+        <li onclick="loadVideo('video1.mp4')">video1.mp4</li>
+        <li onclick="loadVideo('video2.mp4')">video2.mp4</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <video id="videoPlayer" controls>
+        <source src="video1.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la vidéo.
+      </video>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <button onclick="cutClip()">✂</button>
+    <button onclick="addText()">📝</button>
+    <button onclick="addMusic()">🎵</button>
+    <button onclick="removeLastClip()">🗑</button>
+  </div>
+
+  <div class="timeline" id="timeline"></div>
+  <button id="addBtn">+ Ajouter un clip</button>
+
+  <script>
+    const timeline = document.getElementById('timeline');
+    const addBtn = document.getElementById('addBtn');
+    let clipCount = 1;
+    let selectedClip = null;
+
+    addBtn.addEventListener('click', () => {
+      addClip(`Clip ${clipCount}.mp4`);
+      clipCount++;
+    });
+
+    function addClip(name) {
+      const clip = document.createElement('div');
+      clip.className = 'clip';
+      clip.innerText = name;
+      clip.dataset.name = name;
+      clip.addEventListener('click', () => {
+        selectClip(clip);
+      });
+      timeline.appendChild(clip);
+    }
+
+    function selectClip(clip) {
+      const allClips = document.querySelectorAll('.clip');
+      allClips.forEach(c => c.style.border = "none");
+      clip.style.border = "2px solid cyan";
+      selectedClip = clip;
+    }
+
+    function cutClip() {
+      if (!selectedClip) {
+        alert("Sélectionne un clip à découper.");
+        return;
+      }
+
+      const name = selectedClip.dataset.name;
+      const part1 = document.createElement('div');
+      part1.className = 'clip';
+      part1.innerText = name + " (1)";
+      part1.dataset.name = name + " (1)";
+      part1.addEventListener('click', () => selectClip(part1));
+
+      const part2 = document.createElement('div');
+      part2.className = 'clip';
+      part2.innerText = name + " (2)";
+      part2.dataset.name = name + " (2)";
+      part2.addEventListener('click', () => selectClip(part2));
+
+      timeline.insertBefore(part1, selectedClip);
+      timeline.insertBefore(part2, selectedClip.nextSibling);
+      selectedClip.remove();
+      selectedClip = null;
+    }
+
+    function addText() {
+      alert("Fonction 'Ajouter Texte' à venir.");
+    }
+
+    function addMusic() {
+      alert("Fonction 'Ajouter Musique' à venir.");
+    }
+
+    function removeLastClip() {
+      const clips = document.querySelectorAll('.clip');
+      if (clips.length > 0) {
+        clips[clips.length - 1].remove();
+        clipCount--;
+      }
+    }
+
+    function loadVideo(fileName) {
+      const video = document.getElementById('videoPlayer');
+      video.querySelector('source').src = fileName;
+      video.load();
+    }
+  </script>
+</body>
+</html>
