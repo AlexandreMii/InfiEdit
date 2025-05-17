@@ -1,0 +1,41 @@
+
+
+.app-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.file-explorer {
+  width: 250px;
+  background-color: #333;
+  padding: 10px;
+  color: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.video-area {
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #00bfff;
+}
+
+input[type="file"], input[type="text"], button {
+  margin: 10px;
+  padding: 10px;
+  background: #333;
+  color: white;
+  border: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  background: #555;
+}
